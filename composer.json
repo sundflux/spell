@@ -25,7 +25,7 @@
     "post-create-project-cmd": [
       "rm *.md composer.* .gitignore",
       "shopt -s dotglob && mv vendor/druidfi/d8-template/* .",
-      "rm -rf vendor",
+      "rm -rf vendor .git",
       "git init && git add .",
       "tools/init"
     ]
