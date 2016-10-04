@@ -23,10 +23,10 @@
   ],
   "scripts": {
     "post-create-project-cmd": [
-      "rm README.md composer.* .gitignore",
+      "rm *.md composer.* .gitignore",
       "mv vendor/druidfi/d8-template/* .",
       "rm -rf vendor",
-      "git init",
+      "git init && git add .",
       "tools/init"
     ]
   }
