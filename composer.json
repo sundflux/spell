@@ -1,0 +1,19 @@
+{
+  "name": "druidfi/spell",
+  "description": "Spell to create a new Drupal 8 project",
+  "type": "project",
+  "homepage": "https://github.com/druidfi/spell",
+  "authors": [
+    {
+      "name": "Marko Korhonen",
+      "email": "marko.korhonen@druid.fi"
+    }
+  ],
+  "require": {
+    "php": "^5.6 || ^7.0",
+    "druidfi/d8-template": "^1.0"
+  },
+  "scripts": {
+    "post-create-project-cmd": "tools/init"
+  }
+}
