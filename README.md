@@ -3,5 +3,5 @@
 ## How to use?
 
 ```
-$ composer create-project `druidfi/spell <project-path>
-``
+$ composer create-project druidfi/spell <project-path>
+```
