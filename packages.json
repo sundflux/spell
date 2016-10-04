@@ -1,0 +1,14 @@
+{
+  "name": "druidfi/spell",
+  "version": "1.0.0",
+  "description": "Tools to validate package.json files",
+  "author": {
+    "name": "Marko Korhonen",
+    "email": "marko.korhonen@druid.fi",
+    "web": "https://druid.fi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:druidfi/spell.git"
+  }
+}
