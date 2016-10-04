@@ -9,6 +9,8 @@
       "email": "marko.korhonen@druid.fi"
     }
   ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
     "php": "^5.6 || ^7.0",
     "druidfi/d8-template": "^1.0"
