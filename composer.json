@@ -12,20 +12,12 @@
   "minimum-stability": "dev",
   "require": {
     "php": "^5.6 || ^7.0",
-    "druidfi/d8-template": "1.0.0"
+    "druidfi/d8-template": "dev-composer-project"
   },
   "repositories": [
     {
-      "type": "package",
-      "package": {
-        "name": "druidfi/d8-template",
-        "version": "1.0.0",
-        "source": {
-          "url": "https://github.com/druidfi/d8-template.git",
-          "type": "git",
-          "reference": "composer-project"
-        }
-      }
+      "type": "vcs",
+      "url":  "git@github.com:druidfi/d8-template.git"
     }
   ],
   "scripts": {
