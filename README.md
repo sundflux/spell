@@ -7,9 +7,9 @@ After the installation you'll have a directory with our template which is setup 
 ## Requirements
 
 - PHP and Composer
-- access to druifi/d8-template repository
+- Read access to druifi/d8-template repository
 
-## How to use?`
+## How to use?
 
 ```
 $ composer create-project druidfi/spell <project-path> -s dev
