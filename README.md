@@ -20,3 +20,7 @@ $ composer create-project druidfi/spell <project-path> -s dev
 Git has been init in the directory `<project-path>` but you need to specify your remote before you can push.
 
 More documentation on the template can be found at the [druidfi/d8-template](https://github.com/druidfi/d8-template) repository.
+
+## Other information
+
+This project is found from the Packagist: https://packagist.org/packages/druidfi/spell

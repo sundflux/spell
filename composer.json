@@ -24,7 +24,7 @@
   "scripts": {
     "post-create-project-cmd": [
       "rm *.md composer.* .gitignore",
-      "mv vendor/druidfi/d8-template/* .",
+      "shopt -s dotglob && mv vendor/druidfi/d8-template/* .",
       "rm -rf vendor",
       "git init && git add .",
       "tools/init"
