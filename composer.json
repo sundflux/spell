@@ -25,7 +25,8 @@
       "rm README.md composer.* .gitignore",
       "mv vendor/druidfi/d8-template/* .",
       "git init",
-      "tools/init"
+      "tools/init",
+      "echo -e '\nNow you make your first build typing: tools/build development\n'"
     ]
   }
 }
