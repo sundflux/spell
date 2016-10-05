@@ -24,7 +24,3 @@ More documentation on the template can be found at the [druidfi/d8-template](htt
 ## Other information
 
 This project is found from the Packagist: https://packagist.org/packages/druidfi/spell
-
-## TODO
-
-- make first dev build in post-create-project-cmd
