@@ -14,7 +14,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": "^7.0",
-    "druidfi/d8-template": "dev-composer-project"
+    "druidfi/d8-template": "dev-master"
   },
   "repositories": [
     {
