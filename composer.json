@@ -14,6 +14,8 @@
   "minimum-stability": "dev",
   "require": {
     "php": "^7.0",
+    "composer/installers": "~1.0",
+    "drush/drush": "~8.1 || >= 8.1.2",
     "druidfi/d8-template": "dev-composer-json"
   },
   "repositories": [
@@ -22,6 +24,11 @@
       "url":  "git@github.com:druidfi/d8-template.git"
     }
   ],
+  "extra": {
+    "installer-paths": {
+      "dibbadabba": ["type:app-template"]
+    }
+  },
   "scripts": {
     "post-create-project-cmd": [
       "rm *.md composer.* .gitignore",
