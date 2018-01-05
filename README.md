@@ -12,7 +12,7 @@ After the installation you'll have a directory with our template which is setup 
 ## How to use?
 
 ```
-$ composer create-project druidfi/spell:dev-master <project-path>
+$ composer create-project druidfi/spell:dev-master <project-path> --stability dev --no-interaction
 ```
 
 ## Next steps

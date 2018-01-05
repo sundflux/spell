@@ -23,6 +23,10 @@
     },
     {
       "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    },
+    {
+      "type": "composer",
       "url": "https://packagist.org"
     },
     { "packagist": false }
