@@ -7,12 +7,11 @@ After the installation you'll have a directory with our template which is setup 
 ## Requirements
 
 - PHP and Composer
-- Read access to druifi/drupal-project repository
 
 ## How to use?
 
 ```
-$ composer create-project druidfi/spell:dev-master <project-path> --stability dev --no-interaction
+$ composer create-project druidfi/spell:dev-master <project-path> --no-interaction
 ```
 
 ## Next steps
