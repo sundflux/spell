@@ -16,6 +16,7 @@
   "require": {
     "composer/installers": "^1.4",
     "cweagans/composer-patches": "^1.6",
+    "druidfi/amazeeio-scripts": "dev-master",
     "drupal-composer/drupal-scaffold": "^2.3",
     "drupal/admin_toolbar": "^1.22",
     "drupal/config_installer": "^1.5",
@@ -58,7 +59,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@github.com:druidfi/drupal-project.git"
+      "url": "git@github.com:druidfi/amazeeio-scripts.git"
     },
     {
       "type": "composer",
