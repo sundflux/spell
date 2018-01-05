@@ -19,8 +19,13 @@
   "repositories": [
     {
       "type": "vcs",
-      "url":  "git@github.com:druidfi/drupal-project.git"
-    }
+      "url": "git@github.com:druidfi/drupal-project.git"
+    },
+    {
+      "type": "composer",
+      "url": "https://packagist.org"
+    },
+    { "packagist": false }
   ],
   "scripts": {
     "post-create-project-cmd": [
