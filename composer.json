@@ -67,15 +67,8 @@
     }
   ],
   "scripts": {
-    "post-install-cmd": [
-      "echo post-install-cmd"
-    ],
-    "post-update-cmd": [
-      "echo post-update-cmd"
-    ],
     "post-create-project-cmd": [
-      "rm *.md",
-      "rm -rf .git"
+      "shopt -s dotglob && cp vendor/druidfi/amazeeio-scripts/dist/* ."
     ],
     "reset-local": [
       "vendor/bin/reset-local.sh"
