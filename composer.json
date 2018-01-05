@@ -16,7 +16,6 @@
   "require": {
     "composer/installers": "^1.4",
     "cweagans/composer-patches": "^1.6",
-    "druidfi/amazeeio-scripts": "dev-master",
     "drupal-composer/drupal-scaffold": "^2.3",
     "drupal/admin_toolbar": "^1.22",
     "drupal/config_installer": "^1.5",
@@ -28,6 +27,7 @@
     "wikimedia/composer-merge-plugin": "~1.0"
   },
   "require-dev": {
+    "druidfi/amazeeio-scripts": "dev-master",
     "drupal/coder": "^8.2.12",
     "drupal/console": "^1.0.2",
     "drupal/drupal-extension": "~3.3",
@@ -71,6 +71,7 @@
       "shopt -s dotglob && cp vendor/druidfi/amazeeio-scripts/dist/* ."
     ],
     "reset-local": [
+      "vendor/bin/build-dev.sh",
       "vendor/bin/reset-local.sh"
     ]
   }
