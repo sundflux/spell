@@ -68,14 +68,17 @@
   ],
   "scripts": {
     "post-install-cmd": [
-      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+      "echo post-install-cmd"
     ],
     "post-update-cmd": [
-      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+      "echo post-update-cmd"
     ],
     "post-create-project-cmd": [
       "rm *.md",
       "rm -rf .git"
+    ],
+    "reset-local": [
+      "vendor/bin/reset-local.sh"
     ]
   }
 }
