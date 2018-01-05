@@ -74,9 +74,8 @@
       "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
     ],
     "post-create-project-cmd": [
-      "rm *.md composer.* .gitignore",
-      "rm -rf vendor .git",
-      "git init && git add ."
+      "rm *.md",
+      "rm -rf .git"
     ]
   }
 }
