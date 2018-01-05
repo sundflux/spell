@@ -14,7 +14,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": "^7.1",
-    "druidfi/drupal-project": "dev-reset-local"
+    "druidfi/drupal-project": "dev-master"
   },
   "repositories": [
     {
