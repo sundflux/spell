@@ -11,7 +11,7 @@
       "email": "marko.korhonen@druid.fi"
     }
   ],
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
     "php": "^7.1",
