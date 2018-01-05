@@ -11,10 +11,17 @@
       "email": "marko.korhonen@druid.fi"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
   "require": {
     "php": "^7.1",
     "druidfi/drupal-project": "dev-master"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "config": {
+    "sort-packages": true
   },
   "repositories": [
     {
@@ -24,12 +31,7 @@
     {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
-    },
-    {
-      "type": "composer",
-      "url": "https://packagist.org"
-    },
-    { "packagist": false }
+    }
   ],
   "scripts": {
     "post-create-project-cmd": [
