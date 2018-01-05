@@ -13,23 +13,21 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "php": "^7.0",
-    "druidfi/d8-template": "dev-composer-json"
+    "php": "^7.1",
+    "druidfi/drupal-project": "reset-local"
   },
   "repositories": [
     {
       "type": "vcs",
-      "url":  "git@github.com:druidfi/d8-template.git"
+      "url":  "git@github.com:druidfi/drupal-project.git"
     }
   ],
   "scripts": {
     "post-create-project-cmd": [
       "rm *.md composer.* .gitignore",
-      "shopt -s dotglob && mv vendor/druidfi/d8-template/* .",
+      "shopt -s dotglob && mv vendor/druidfi/drupal-project/* .",
       "rm -rf vendor .git",
-      "git init && git add .",
-      "tools/init",
-      "tools/build development"
+      "git init && git add ."
     ]
   }
 }
