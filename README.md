@@ -7,7 +7,7 @@ After the installation you'll have a directory with our template which is setup 
 ## Requirements
 
 - PHP and Composer
-- Read access to druifi/d8-template repository
+- Read access to druifi/drupal-project repository
 
 ## How to use?
 
@@ -19,7 +19,7 @@ $ composer create-project druidfi/spell:dev-master <project-path>
 
 Git has been init in the directory `<project-path>` but you need to specify your remote before you can push.
 
-More documentation on the template can be found at the [druidfi/d8-template](https://github.com/druidfi/d8-template) repository.
+More documentation on the template can be found at the [druidfi/drupal-project](https://github.com/druidfi/drupal-project) repository.
 
 ## Other information
 
