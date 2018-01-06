@@ -25,7 +25,8 @@ install:
   - pygmy up
 
 script:
-  - echo ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+  # UID 1000 is user "drupal" inside the container.
+  - sudo chown 1000:1000 -R $TRAVIS_BUILD_DIR
   - composer create-project druidfi/spell:dev-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} mysite --no-interaction
   - cd mysite
   - composer build-dev
