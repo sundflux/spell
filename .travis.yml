@@ -3,14 +3,26 @@ language: ruby
 rvm:
   - 2.4
 
+php:
+  - 7.1
+
 addons:
   apt:
     packages:
       - docker-ce
 
+cache:
+  bundler: true
+  apt: true
+  directories:
+  - "$HOME/.composer/cache"
+
 services:
   - docker
 
+before_install:
+  - composer self-update
+  - composer validate --no-check-all --ansi
 
 install:
   - gem install pygmy
