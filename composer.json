@@ -72,7 +72,7 @@
       "git init && git add ."
     ],
     "build-dev": [
-      "vendor/bin/build-dev.sh"
+      "build-dev.sh"
     ],
     "build-dev-actions": [
       "npm install --engine-strict true",
@@ -91,11 +91,11 @@
       "cp conf/all.settings.php public/sites/default/all.settings.php"
     ],
     "fix": [
-      "vendor/bin/phpcbf --colors --standard=Drupal --extensions=php,module ./public/modules/custom",
-      "vendor/bin/phpcbf --colors --standard=Drupal --extensions=php,theme ./public/themes/custom"
+      "phpcbf --colors --standard=Drupal --extensions=php,module ./public/modules/custom",
+      "phpcbf --colors --standard=Drupal --extensions=php,theme ./public/themes/custom"
     ],
     "reset-local": [
-      "vendor/bin/reset-local.sh"
+      "reset-local.sh"
     ],
     "symlink-files": [
       "mkdir -m 777 -p files files_private",
@@ -115,11 +115,11 @@
       "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/themes/custom/*/js"
     ],
     "test-static-php": [
-      "vendor/bin/phpcs --colors --standard=Drupal --extensions=php,module --ignore='*.css,*.md' ./public/modules/custom",
-      "vendor/bin/phpcs --colors --standard=Drupal --extensions=php,theme --ignore='*.css,*.md' ./public/themes/custom"
+      "phpcs --colors --standard=Drupal --extensions=php,module --ignore='*.css,*.md' ./public/modules/custom",
+      "phpcs --colors --standard=Drupal --extensions=php,theme --ignore='*.css,*.md' ./public/themes/custom"
     ],
     "test-unit": [
-      "vendor/bin/phpunit -c phpunit.xml.dist --testsuite unit"
+      "phpunit -c phpunit.xml.dist --testsuite unit"
     ],
     "update-deps": [
       "@composer update --with-dependencies --no-scripts --no-suggest --prefer-dist --ignore-platform-reqs --ansi"
