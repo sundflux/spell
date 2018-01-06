@@ -1,10 +1,7 @@
-language: ruby
+language: php
 
-env:
-  - PHP_VERSION="7.1"
-
-rvm:
-  - 2.4
+php:
+  - 7.1
 
 addons:
   apt:
@@ -20,7 +17,7 @@ services:
   - docker
 
 before_install:
-  - php install $PHP_VERSION
+  - rvm install 2.4
   - composer self-update
 
 install:
