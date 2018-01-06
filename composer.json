@@ -68,7 +68,7 @@
   ],
   "scripts": {
     "post-create-project-cmd": [
-      "shopt -s dotglob && cp -R vendor/druidfi/amazeeio-scripts/dist/* .",
+      "rsync -av --exclude=\".*\" vendor/druidfi/amazeeio-scripts/dist/ .",
       "git init && git add ."
     ],
     "build-dev": [
