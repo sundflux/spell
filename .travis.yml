@@ -21,6 +21,8 @@ services:
   - docker
 
 before_install:
+  - echo "memory_limit = 2048M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - php -v
   - composer self-update
   - composer validate --no-check-all --ansi
 
