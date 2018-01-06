@@ -10,8 +10,8 @@ addons:
 
 cache:
   apt: true
-  directories:
-  - "$HOME/.composer/cache"
+#  directories:
+#  - "$HOME/.composer/cache"
 
 services:
   - docker
