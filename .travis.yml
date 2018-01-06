@@ -1,10 +1,10 @@
 language: ruby
 
+env:
+  - PHP_VERSION="7.1"
+
 rvm:
   - 2.4
-
-php:
-  - 7.1
 
 addons:
   apt:
@@ -12,7 +12,6 @@ addons:
       - docker-ce
 
 cache:
-  bundler: true
   apt: true
   directories:
   - "$HOME/.composer/cache"
@@ -21,10 +20,8 @@ services:
   - docker
 
 before_install:
-  - echo "memory_limit = 2048M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - php -v
+  - php install $PHP_VERSION
   - composer self-update
-  - composer validate --no-check-all --ansi
 
 install:
   - gem install pygmy
