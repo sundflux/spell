@@ -25,7 +25,7 @@ install:
   - pygmy up
 
 script:
-  - echo $TRAVIS_PULL_REQUEST_BRANCH
-  - composer create-project druidfi/spell:dev-$TRAVIS_PULL_REQUEST_BRANCH mysite --no-interaction
+  - echo ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+  - composer create-project druidfi/spell:dev-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} mysite --no-interaction
   - cd mysite
   - composer build-dev
