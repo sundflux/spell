@@ -68,7 +68,7 @@
   ],
   "scripts": {
     "post-create-project-cmd": [
-      "rsync -av --exclude=\".*\" vendor/druidfi/amazeeio-scripts/dist/ .",
+      "cp -R vendor/druidfi/amazeeio-scripts/dist/* .",
       "git init && git add ."
     ],
     "build-dev": [
