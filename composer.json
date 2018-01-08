@@ -68,17 +68,31 @@
   ],
   "scripts": {
     "post-create-project-cmd": [
-      "shopt -s dotglob && cp -R vendor/druidfi/amazeeio-scripts/dist/* .",
+      "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
       "git init && git add ."
     ],
     "build-dev": [
-      "vendor/bin/build-dev.sh"
+      "build-dev.sh"
     ],
     "build-dev-actions": [
       "npm install --engine-strict true",
       "@composer install --prefer-dist --no-suggest --ignore-platform-reqs --ansi",
       "cp -R ./vendor/drupal/coder/coder_sniffer/Drupal ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/Drupal",
       "cp -R ./vendor/drupal/coder/coder_sniffer/DrupalPractice ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/DrupalPractice",
+      "@copy-configuration",
+      "cp conf/development.services.yml public/sites/default/development.services.yml",
+      "cp conf/development.settings.php public/sites/default/development.settings.php",
+      "@symlink-files"
+    ],
+    "build-production": [
+      "@composer install --no-dev --prefer-dist --no-suggest --optimize-autoloader --ignore-platform-reqs --ansi",
+      "@copy-configuration",
+      "cp conf/production.services.yml public/sites/default/production.services.yml",
+      "cp conf/production.settings.php public/sites/default/production.settings.php",
+      "@symlink-files"
+    ],
+    "build-testing": [
+      "@composer install --no-dev --prefer-dist --no-suggest --optimize-autoloader --ignore-platform-reqs --ansi",
       "@copy-configuration",
       "cp conf/development.services.yml public/sites/default/development.services.yml",
       "cp conf/development.settings.php public/sites/default/development.settings.php",
@@ -91,11 +105,11 @@
       "cp conf/all.settings.php public/sites/default/all.settings.php"
     ],
     "fix": [
-      "vendor/bin/phpcbf --colors --standard=Drupal --extensions=php,module ./public/modules/custom",
-      "vendor/bin/phpcbf --colors --standard=Drupal --extensions=php,theme ./public/themes/custom"
+      "phpcbf --colors --standard=Drupal --extensions=php,module ./public/modules/custom",
+      "phpcbf --colors --standard=Drupal --extensions=php,theme ./public/themes/custom"
     ],
     "reset-local": [
-      "vendor/bin/reset-local.sh"
+      "reset-local.sh"
     ],
     "symlink-files": [
       "mkdir -m 777 -p files files_private",
@@ -115,11 +129,11 @@
       "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/themes/custom/*/js"
     ],
     "test-static-php": [
-      "vendor/bin/phpcs --colors --standard=Drupal --extensions=php,module --ignore='*.css,*.md' ./public/modules/custom",
-      "vendor/bin/phpcs --colors --standard=Drupal --extensions=php,theme --ignore='*.css,*.md' ./public/themes/custom"
+      "phpcs --colors --standard=Drupal --extensions=php,module --ignore='*.css,*.md' ./public/modules/custom",
+      "phpcs --colors --standard=Drupal --extensions=php,theme --ignore='*.css,*.md' ./public/themes/custom"
     ],
     "test-unit": [
-      "vendor/bin/phpunit -c phpunit.xml.dist --testsuite unit"
+      "phpunit -c phpunit.xml.dist --testsuite unit"
     ],
     "update-deps": [
       "@composer update --with-dependencies --no-scripts --no-suggest --prefer-dist --ignore-platform-reqs --ansi"
