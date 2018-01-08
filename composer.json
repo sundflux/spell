@@ -84,6 +84,20 @@
       "cp conf/development.settings.php public/sites/default/development.settings.php",
       "@symlink-files"
     ],
+    "build-production": [
+      "@composer install --no-dev --prefer-dist --no-suggest --optimize-autoloader --ignore-platform-reqs --ansi",
+      "@copy-configuration",
+      "cp conf/production.services.yml public/sites/default/production.services.yml",
+      "cp conf/production.settings.php public/sites/default/production.settings.php",
+      "@symlink-files"
+    ],
+    "build-testing": [
+      "@composer install --no-dev --prefer-dist --no-suggest --optimize-autoloader --ignore-platform-reqs --ansi",
+      "@copy-configuration",
+      "cp conf/development.services.yml public/sites/default/development.services.yml",
+      "cp conf/development.settings.php public/sites/default/development.settings.php",
+      "@symlink-files"
+    ],
     "copy-configuration": [
       "chmod 0750 public/sites/default",
       "rm -f public/sites/default/settings.php && cp conf/settings.php public/sites/default/settings.php",
