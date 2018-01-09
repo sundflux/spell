@@ -16,19 +16,21 @@ codebase.
 Create the project locally:
 
 ```
-$ composer create-project druidfi/spell:dev-master <project-path> --no-interaction
+$ composer create-project druidfi/spell:dev-master YOUR_PROJECT --no-interaction
 ```
 
 Start the development environment and build the initial codebase:
 
 ```
-$ cd <project-path>
+$ cd YOUR_PROJECT
 $ composer build-dev
 ```
 
 ## Next steps
 
 Git has been init in the directory `<project-path>` but you need to specify your remote before you can push.
+
+Also this readme has been replaced with [this one](README.project.md).
 
 ## Other information
 
