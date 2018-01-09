@@ -69,7 +69,7 @@
   "scripts": {
     "post-create-project-cmd": [
       "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
-      "cp README.project.md README.md",
+      "mv README.project.md README.md",
       "git init && git add ."
     ],
     "build-dev": [
