@@ -20,16 +20,21 @@ These recommended modules are included in the `composer.json`, but you can remov
 
 By default we'll use Docker based environment.
 
+### Requirements
+
+- PHP and Composer
+- [Docker and Cachalot/Pygmy](https://github.com/druidfi/guidelines/blob/master/docs/local_dev_env.md)
+
 ### Create and start the environment
 
 Change the hostname in `docker-compose.yml` file:
 
-E.g. `mysite.fi.docker.amazee.io` to `customer.fi.docker.amazee.io`
+E.g. `mysite.fi.docker.amazee.io` to `yoursite.fi.docker.amazee.io`
 
 Then create and start the environment:
 
 ```
-$ docker-compose up -d
+$ composer build-dev
 ```
 
 ### Login to Drupal container
