@@ -19,12 +19,18 @@ Create the project locally:
 $ composer create-project druidfi/spell:dev-master YOUR_PROJECT --no-interaction
 ```
 
+Change hostname for your local site in the `YOUR_PROJECT/docker-compose.yml`:
+
+`hostname: &hostname mysite.fi.docker.amazee.io` to `hostname: &hostname yoursite.fi.docker.amazee.io`
+
 Start the development environment and build the initial codebase:
 
 ```
 $ cd YOUR_PROJECT
 $ composer build-dev
 ```
+
+Now your site can can be accessed from http://yoursite.fi.docker.amazee.io
 
 ## Next steps
 

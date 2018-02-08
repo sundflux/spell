@@ -31,6 +31,12 @@ Change the hostname in `docker-compose.yml` file:
 
 E.g. `mysite.fi.docker.amazee.io` to `yoursite.fi.docker.amazee.io`
 
+For the first time (new project member):
+
+```
+$ composer build-init
+```
+
 Then create and start the environment:
 
 ```
