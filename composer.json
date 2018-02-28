@@ -19,11 +19,12 @@
     "drupal-composer/drupal-scaffold": "^2.3",
     "drupal/admin_toolbar": "^1.22",
     "drupal/config_installer": "^1.5",
-    "drupal/core": "^8.4.4",
+    "drupal/core": "^8.5.0",
+    "drupal/gdpr": "^1.0@alpha",
     "drupal/pathauto": "^1.0",
     "drupal/swiftmailer": "^1.0@beta",
     "drupal/system_status": "^2.6",
-    "drush/drush": "^8.1.15",
+    "drush/drush": "^8.1.16",
     "wikimedia/composer-merge-plugin": "~1.0"
   },
   "require-dev": {
