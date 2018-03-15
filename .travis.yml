@@ -29,4 +29,4 @@ script:
   - cd mysite
   # UID 1000 is user "drupal" inside the container.
   - sudo chown 1000:1000 -R $TRAVIS_BUILD_DIR
-  - composer build-dev
+  - make build-dev

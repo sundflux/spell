@@ -1,14 +1,13 @@
 {
   "name": "druidfi/spell",
   "description": "Spell to create a new Drupal 8 project based on druidfi/d8-template",
-  "version": "1.0.0",
   "type": "project",
   "license": "MIT",
   "homepage": "https://github.com/druidfi/spell",
   "authors": [
     {
-      "name": "Marko Korhonen",
-      "email": "marko.korhonen@druid.fi"
+      "name": "Druid.fi",
+      "email": "info@druid.fi"
     }
   ],
   "minimum-stability": "dev",
@@ -74,7 +73,7 @@
       "git init && git add ."
     ],
     "build-dev": [
-      "build-dev.sh"
+      "# Use instead: make build-dev"
     ],
     "build-dev-actions": [
       "npm install --engine-strict true",
@@ -85,6 +84,10 @@
       "cp conf/development.services.yml public/sites/default/development.services.yml",
       "cp conf/development.settings.php public/sites/default/development.settings.php",
       "@symlink-files"
+    ],
+    "build-init": [
+      "@composer install --prefer-dist --no-suggest --ignore-platform-reqs --ansi",
+      "@composer drupal-scaffold"
     ],
     "build-production": [
       "@composer install --no-dev --prefer-dist --no-suggest --optimize-autoloader --ignore-platform-reqs --ansi",
@@ -106,12 +109,15 @@
       "cp conf/all.services.yml public/sites/default/all.settings.yml",
       "cp conf/all.settings.php public/sites/default/all.settings.php"
     ],
+    "drupal-scaffold": [
+      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+    ],
     "fix": [
       "phpcbf --colors --standard=Drupal --extensions=php,module ./public/modules/custom",
       "phpcbf --colors --standard=Drupal --extensions=php,theme ./public/themes/custom"
     ],
     "reset-local": [
-      "reset-local.sh"
+      "# Use instead: make reset-local dev"
     ],
     "symlink-files": [
       "mkdir -m 777 -p files files_private",
@@ -138,7 +144,7 @@
       "phpunit -c phpunit.xml.dist --testsuite unit"
     ],
     "update-deps": [
-      "@composer update --with-dependencies --no-scripts --no-suggest --prefer-dist --ignore-platform-reqs --ansi"
+      "# Use instead: make update"
     ]
   }
 }
