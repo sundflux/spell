@@ -58,10 +58,6 @@
   },
   "repositories": [
     {
-      "type": "vcs",
-      "url": "git@github.com:druidfi/amazeeio-scripts.git"
-    },
-    {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
     }
@@ -144,7 +140,7 @@
       "phpunit -c phpunit.xml.dist --testsuite unit"
     ],
     "update-deps": [
-      "# Use instead: make update"
+      "@composer update --with-dependencies --no-scripts --no-suggest --prefer-dist --ignore-platform-reqs --ansi"
     ]
   }
 }
