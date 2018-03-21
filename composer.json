@@ -72,14 +72,11 @@
       "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
     ],
     "fix": [
-      "cp -R ./vendor/drupal/coder/coder_sniffer/Drupal ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/Drupal",
-      "cp -R ./vendor/drupal/coder/coder_sniffer/DrupalPractice ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/DrupalPractice",
+      "@test-setup-cs",
       "phpcbf --colors --standard=Drupal --extensions=php,module ./public/modules/custom",
       "phpcbf --colors --standard=Drupal --extensions=php,theme ./public/themes/custom"
     ],
     "test": [
-      "cp -R ./vendor/drupal/coder/coder_sniffer/Drupal ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/Drupal",
-      "cp -R ./vendor/drupal/coder/coder_sniffer/DrupalPractice ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/DrupalPractice",
       "@test-behavioral",
       "@test-static-js",
       "@test-static-php",
@@ -88,11 +85,16 @@
     "test-behavioral": [
       "tools/behavioral-tests"
     ],
+    "test-setup-cs": [
+      "cp -R ./vendor/drupal/coder/coder_sniffer/Drupal ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/Drupal",
+      "cp -R ./vendor/drupal/coder/coder_sniffer/DrupalPractice ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/DrupalPractice"
+    ],
     "test-static-js": [
       "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/modules/custom/*/js",
       "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/themes/custom/*/js"
     ],
     "test-static-php": [
+      "@test-setup-cs",
       "phpcs --colors --standard=Drupal --extensions=php,module --ignore='*.css,*.md' ./public/modules/custom",
       "phpcs --colors --standard=Drupal --extensions=php,theme --ignore='*.css,*.md' ./public/themes/custom"
     ],
