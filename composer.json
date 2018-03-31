@@ -1,14 +1,13 @@
 {
   "name": "druidfi/spell",
   "description": "Spell to create a new Drupal 8 project based on druidfi/d8-template",
-  "version": "1.0.0",
   "type": "project",
   "license": "MIT",
   "homepage": "https://github.com/druidfi/spell",
   "authors": [
     {
-      "name": "Marko Korhonen",
-      "email": "marko.korhonen@druid.fi"
+      "name": "Druid.fi",
+      "email": "info@druid.fi"
     }
   ],
   "minimum-stability": "dev",
@@ -19,16 +18,16 @@
     "drupal-composer/drupal-scaffold": "^2.3",
     "drupal/admin_toolbar": "^1.22",
     "drupal/config_installer": "^1.5",
-    "drupal/core": "^8.5.0",
+    "drupal/core": "^8.5.1",
     "drupal/gdpr": "^1.0@alpha",
-    "drupal/pathauto": "^1.0",
+    "drupal/pathauto": "^1.1",
     "drupal/swiftmailer": "^1.0@beta",
     "drupal/system_status": "^2.6",
     "drush/drush": "^8.1.16",
     "wikimedia/composer-merge-plugin": "~1.0"
   },
   "require-dev": {
-    "druidfi/amazeeio-scripts": "dev-master",
+    "druidfi/amazeeio-scripts": "1.0.0",
     "drupal/coder": "^8.2.12",
     "drupal/console": "^1.0.2",
     "drupal/drupal-extension": "~3.3",
@@ -38,6 +37,9 @@
     "drupal/drupal": "*"
   },
   "config": {
+    "platform": {
+      "php": "7.1"
+    },
     "sort-packages": true
   },
   "extra": {
@@ -58,10 +60,6 @@
     }
   },
   "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:druidfi/amazeeio-scripts.git"
-    },
     {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
