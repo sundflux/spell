@@ -38,6 +38,18 @@ Git has been init in the directory `<project-path>` but you need to specify your
 
 Also this readme has been replaced with [this one](README.project.md).
 
+## Developing Spell
+
+Testing create-project:
+
+```
+$ make test-master
+```
+
+This will basically do following command:
+
+`composer create-project druidfi/spell:dev-master /tmp/mysite/master --no-interaction`
+
 ## Other information
 
 This project is found from the Packagist: https://packagist.org/packages/druidfi/spell
