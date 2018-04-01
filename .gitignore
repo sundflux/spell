@@ -10,7 +10,7 @@ public/themes/contrib
 public/profiles/config_installer
 public/profiles/contrib
 public/libraries
-public/sites/*
+public/sites/default/files
 tools/init-tools-status
 vendor
 
