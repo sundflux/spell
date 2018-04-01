@@ -27,7 +27,7 @@
     "wikimedia/composer-merge-plugin": "~1.0"
   },
   "require-dev": {
-    "druidfi/amazeeio-scripts": "1.0.0",
+    "druidfi/amazeeio-scripts": "1.0.1",
     "drupal/coder": "^8.2.12",
     "drupal/console": "^1.0.2",
     "drupal/drupal-extension": "~3.3",
