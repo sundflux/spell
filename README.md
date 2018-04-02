@@ -1,5 +1,7 @@
 # druidfi/spell
 
+[![Build Status](https://travis-ci.org/druidfi/spell.svg?branch=master)](https://travis-ci.org/druidfi/spell)
+
 This is a skeleton repository which will create a new Drupal 8 project for you and setup Docker based development
 environment by Amazee.io.
 
