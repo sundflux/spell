@@ -1,6 +1,6 @@
 {
   "name": "druidfi/spell",
-  "description": "Spell to create a new Drupal 8 project based on druidfi/d8-template",
+  "description": "Spell to create a new Drupal 8 project",
   "type": "project",
   "license": "MIT",
   "homepage": "https://github.com/druidfi/spell",
@@ -71,49 +71,13 @@
       "mv README.project.md README.md",
       "git init && git add ."
     ],
-    "build-dev": [
-      "build-dev.sh"
-    ],
-    "build-dev-actions": [
-      "npm install --engine-strict true",
-      "@composer install --prefer-dist --no-suggest --ignore-platform-reqs --ansi",
-      "cp -R ./vendor/drupal/coder/coder_sniffer/Drupal ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/Drupal",
-      "cp -R ./vendor/drupal/coder/coder_sniffer/DrupalPractice ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/DrupalPractice",
-      "@copy-configuration",
-      "cp conf/development.services.yml public/sites/default/development.services.yml",
-      "cp conf/development.settings.php public/sites/default/development.settings.php",
-      "@symlink-files"
-    ],
-    "build-production": [
-      "@composer install --no-dev --prefer-dist --no-suggest --optimize-autoloader --ignore-platform-reqs --ansi",
-      "@copy-configuration",
-      "cp conf/production.services.yml public/sites/default/production.services.yml",
-      "cp conf/production.settings.php public/sites/default/production.settings.php",
-      "@symlink-files"
-    ],
-    "build-testing": [
-      "@composer install --no-dev --prefer-dist --no-suggest --optimize-autoloader --ignore-platform-reqs --ansi",
-      "@copy-configuration",
-      "cp conf/development.services.yml public/sites/default/development.services.yml",
-      "cp conf/development.settings.php public/sites/default/development.settings.php",
-      "@symlink-files"
-    ],
-    "copy-configuration": [
-      "chmod 0750 public/sites/default",
-      "rm -f public/sites/default/settings.php && cp conf/settings.php public/sites/default/settings.php",
-      "cp conf/all.services.yml public/sites/default/all.settings.yml",
-      "cp conf/all.settings.php public/sites/default/all.settings.php"
+    "drupal-scaffold": [
+      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
     ],
     "fix": [
+      "@test-setup-cs",
       "phpcbf --colors --standard=Drupal --extensions=php,module ./public/modules/custom",
       "phpcbf --colors --standard=Drupal --extensions=php,theme ./public/themes/custom"
-    ],
-    "reset-local": [
-      "reset-local.sh"
-    ],
-    "symlink-files": [
-      "mkdir -m 777 -p files files_private",
-      "ln -sfn ../../../files public/sites/default/files"
     ],
     "test": [
       "@test-behavioral",
@@ -124,16 +88,25 @@
     "test-behavioral": [
       "tools/behavioral-tests"
     ],
+    "test-setup-cs": [
+      "cp -R ./vendor/drupal/coder/coder_sniffer/Drupal ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/Drupal",
+      "cp -R ./vendor/drupal/coder/coder_sniffer/DrupalPractice ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/DrupalPractice"
+    ],
     "test-static-js": [
       "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/modules/custom/*/js",
       "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/themes/custom/*/js"
     ],
     "test-static-php": [
+      "@test-setup-cs",
       "phpcs --colors --standard=Drupal --extensions=php,module --ignore='*.css,*.md' ./public/modules/custom",
       "phpcs --colors --standard=Drupal --extensions=php,theme --ignore='*.css,*.md' ./public/themes/custom"
     ],
     "test-unit": [
       "phpunit -c phpunit.xml.dist --testsuite unit"
+    ],
+    "update-amazee-scripts": [
+      "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
+      "git status -s"
     ],
     "update-deps": [
       "@composer update --with-dependencies --no-scripts --no-suggest --prefer-dist --ignore-platform-reqs --ansi"
