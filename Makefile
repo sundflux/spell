@@ -6,8 +6,10 @@
 #	composer create-project druidfi/spell /tmp/mysite/1.0.0 1.0.0 --no-interaction
 
 test-master: ## Test creating a project with the master branch
-	$(call colorecho, "\n- Do something...\n")
-	composer create-project druidfi/spell:dev-master /tmp/mysite/master --no-interaction
+	mkdir -p ${CURDIR}/tests/mysite
+	rm -rf ${CURDIR}/tests/mysite/master
+	$(call colorecho, "\n- Test creating a project using master branch...\n")
+	composer create-project druidfi/spell:dev-master ${CURDIR}/tests/mysite/master --no-interaction
 
 help: ## Print this help
 	$(call colorecho, "\nAvailable make commands:\n")

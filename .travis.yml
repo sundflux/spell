@@ -21,10 +21,10 @@ before_install:
   - composer self-update
 
 install:
-  - gem install pygmy
-  - pygmy up
+#  - gem install pygmy
+#  - pygmy up
 
 script:
   - composer create-project druidfi/spell:dev-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} mysite --no-interaction
-  - cd mysite
-  - make init
+#  - cd mysite
+#  - make init
