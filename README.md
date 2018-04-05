@@ -29,7 +29,7 @@ Start the development environment and build the initial codebase:
 
 ```
 $ cd YOUR_PROJECT
-$ make build-init
+$ make init
 ```
 
 Now your site can can be accessed from http://yoursite.fi.docker.amazee.io
