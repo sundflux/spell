@@ -3,7 +3,6 @@ drush/contrib/
 files
 files_private
 node_modules
-public/*.*
 public/core
 public/modules/contrib
 public/themes/contrib
