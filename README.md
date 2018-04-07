@@ -11,7 +11,7 @@ codebase.
 ## Requirements
 
 - PHP and Composer
-- [Docker and Cachalot/Pygmy](https://github.com/druidfi/guidelines/blob/master/docs/local_dev_env.md)
+- [Docker and Pygmy](https://github.com/druidfi/guidelines/blob/master/docs/local_dev_env.md)
 
 ## How to use?
 
