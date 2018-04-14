@@ -30,7 +30,7 @@ class SpellInstaller
      * @var string[]
      */
     private $assetsToRemove = [
-        '.travis.yml',
+        //'.travis.yml',
         'CHANGELOG.md',
     ];
 
