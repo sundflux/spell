@@ -1,115 +1,140 @@
 {
-  "name": "druidfi/spell",
-  "description": "Spell to create a new Drupal 8 project",
-  "type": "project",
-  "license": "MIT",
-  "homepage": "https://github.com/druidfi/spell",
-  "authors": [
-    {
-      "name": "Druid.fi",
-      "email": "info@druid.fi"
-    }
-  ],
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "require": {
-    "composer/installers": "^1.4",
-    "cweagans/composer-patches": "^1.6",
-    "drupal-composer/drupal-scaffold": "^2.3",
-    "drupal/admin_toolbar": "^1.22",
-    "drupal/config_installer": "^1.5",
-    "drupal/core": "^8.5.1",
-    "drupal/gdpr": "^1.0@alpha",
-    "drupal/pathauto": "^1.1",
-    "drupal/swiftmailer": "^1.0@beta",
-    "drupal/system_status": "^2.6",
-    "drush/drush": "^8.1.16",
-    "wikimedia/composer-merge-plugin": "~1.0"
-  },
-  "require-dev": {
-    "druidfi/amazeeio-scripts": "dev-master",
-    "drupal/coder": "^8.2.12",
-    "drupal/console": "^1.8.0",
-    "drupal/drupal-extension": "~3.3",
-    "phpunit/phpunit": "~6.1"
-  },
-  "conflict": {
-    "drupal/drupal": "*"
-  },
-  "config": {
-    "platform": {
-      "php": "7.1"
+    "name": "druidfi/spell",
+    "description": "Spell to create a new Drupal 8 project",
+    "type": "project",
+    "license": "MIT",
+    "homepage": "https://github.com/druidfi/spell",
+    "authors": [
+        {
+            "name": "Druid.fi",
+            "email": "info@druid.fi"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "composer/installers": "^1.4",
+        "cweagans/composer-patches": "^1.6",
+        "drupal-composer/drupal-scaffold": "^2.3",
+        "drupal/admin_toolbar": "^1.22",
+        "drupal/config_installer": "^1.5",
+        "drupal/core": "^8.5.1",
+        "drupal/gdpr": "^1.0@alpha",
+        "drupal/pathauto": "^1.1",
+        "drupal/swiftmailer": "^1.0@beta",
+        "drupal/system_status": "^2.6",
+        "drush/drush": "^8.1.16",
+        "wikimedia/composer-merge-plugin": "~1.0"
     },
-    "sort-packages": true
-  },
-  "extra": {
-    "merge-plugin": {
-      "include": [
-        "public/modules/custom/*/composer.json"
-      ]
+    "require-dev": {
+        "drupal/coder": "^8.2.12",
+        "drupal/console": "^1.8.0",
+        "drupal/drupal-extension": "~3.3",
+        "phpunit/phpunit": "~6.1",
+        "druidfi/amazeeio-scripts": "dev-master"
     },
-    "installer-paths": {
-      "public/core": ["type:drupal-core"],
-      "public/libraries/{$name}": ["type:drupal-library"],
-      "public/modules/contrib/{$name}": ["type:drupal-module"],
-      "public/modules/custom/{$name}": ["type:drupal-module-custom"],
-      "public/profiles/{$name}": ["type:drupal-profile"],
-      "public/themes/contrib/{$name}": ["type:drupal-theme"],
-      "public/themes/custom/{$name}": ["type:drupal-theme-custom"],
-      "drush/{$name}": ["type:drupal-drush"]
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "config": {
+        "platform": {
+            "php": "7.1"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "merge-plugin": {
+            "include": [
+                "public/modules/custom/*/composer.json"
+            ]
+        },
+        "installer-paths": {
+            "public/core": [
+                "type:drupal-core"
+            ],
+            "public/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "public/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "public/modules/custom/{$name}": [
+                "type:drupal-module-custom"
+            ],
+            "public/profiles/{$name}": [
+                "type:drupal-profile"
+            ],
+            "public/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "public/themes/custom/{$name}": [
+                "type:drupal-theme-custom"
+            ],
+            "drush/{$name}": [
+                "type:drupal-drush"
+            ]
+        },
+        "optional-packages": {
+            "amazeeio": 1,
+            "foobar": 2
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SpellInstaller\\": "src/SpellInstaller/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SpellInstallerTest\\": "test/SpellInstallerTest/"
+        }
+    },
+    "scripts": {
+        "drupal-scaffold": [
+            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+        ],
+        "fix": [
+            "@test-setup-cs",
+            "phpcbf --colors --standard=Drupal --extensions=php,module ./public/modules/custom",
+            "phpcbf --colors --standard=Drupal --extensions=php,theme ./public/themes/custom"
+        ],
+        "test": [
+            "@test-behavioral",
+            "@test-static-js",
+            "@test-static-php",
+            "@test-unit"
+        ],
+        "test-behavioral": [
+            "tools/behavioral-tests"
+        ],
+        "test-setup-cs": [
+            "cp -R ./vendor/drupal/coder/coder_sniffer/Drupal ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/Drupal",
+            "cp -R ./vendor/drupal/coder/coder_sniffer/DrupalPractice ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/DrupalPractice"
+        ],
+        "test-static-js": [
+            "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/modules/custom/*/js",
+            "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/themes/custom/*/js"
+        ],
+        "test-static-php": [
+            "@test-setup-cs",
+            "phpcs --colors --standard=Drupal --extensions=php,module --ignore='*.css,*.md' ./public/modules/custom",
+            "phpcs --colors --standard=Drupal --extensions=php,theme --ignore='*.css,*.md' ./public/themes/custom"
+        ],
+        "test-unit": [
+            "phpunit -c phpunit.xml.dist --testsuite unit"
+        ],
+        "update-amazee-scripts": [
+            "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
+            "git status -s"
+        ],
+        "update-deps": [
+            "@composer update --with-dependencies --no-scripts --no-suggest --prefer-dist --ignore-platform-reqs --ansi"
+        ]
     }
-  },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://packages.drupal.org/8"
-    }
-  ],
-  "scripts": {
-    "post-create-project-cmd": [
-      "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
-      "mv README.project.md README.md",
-      "git init && git add ."
-    ],
-    "drupal-scaffold": [
-      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
-    ],
-    "fix": [
-      "@test-setup-cs",
-      "phpcbf --colors --standard=Drupal --extensions=php,module ./public/modules/custom",
-      "phpcbf --colors --standard=Drupal --extensions=php,theme ./public/themes/custom"
-    ],
-    "test": [
-      "@test-behavioral",
-      "@test-static-js",
-      "@test-static-php",
-      "@test-unit"
-    ],
-    "test-behavioral": [
-      "tools/behavioral-tests"
-    ],
-    "test-setup-cs": [
-      "cp -R ./vendor/drupal/coder/coder_sniffer/Drupal ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/Drupal",
-      "cp -R ./vendor/drupal/coder/coder_sniffer/DrupalPractice ./vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/DrupalPractice"
-    ],
-    "test-static-js": [
-      "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/modules/custom/*/js",
-      "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/themes/custom/*/js"
-    ],
-    "test-static-php": [
-      "@test-setup-cs",
-      "phpcs --colors --standard=Drupal --extensions=php,module --ignore='*.css,*.md' ./public/modules/custom",
-      "phpcs --colors --standard=Drupal --extensions=php,theme --ignore='*.css,*.md' ./public/themes/custom"
-    ],
-    "test-unit": [
-      "phpunit -c phpunit.xml.dist --testsuite unit"
-    ],
-    "update-amazee-scripts": [
-      "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
-      "git status -s"
-    ],
-    "update-deps": [
-      "@composer update --with-dependencies --no-scripts --no-suggest --prefer-dist --ignore-platform-reqs --ansi"
-    ]
-  }
 }
