@@ -74,10 +74,6 @@
             "drush/{$name}": [
                 "type:drupal-drush"
             ]
-        },
-        "optional-packages": {
-            "amazeeio": 1,
-            "foobar": 2
         }
     },
     "repositories": [

@@ -119,7 +119,7 @@ class SpellInstaller
         $installer->promptForOptionalPackages();
         $installer->updateRootPackage();
         $installer->removeInstallerFromDefinition();
-        $installer->finalizePackage();
+        //$installer->finalizePackage();
     }
 
     public function __construct(IOInterface $io, Composer $composer, string $projectRoot = null)
@@ -181,6 +181,7 @@ class SpellInstaller
             return;
         }
         // Get answer
+
         $answer = $this->askQuestion($question, $defaultOption);
         // Process answer
         $this->processAnswer($question, $answer);
@@ -377,7 +378,7 @@ class SpellInstaller
      */
     private function cleanUp() : void
     {
-        $this->io->write('<info>Removing Expressive installer classes, configuration, tests and docs</info>');
+        $this->io->write('<info>Removing Spell installer classes, configuration, tests and docs</info>');
         foreach ($this->assetsToRemove as $target) {
             $target = $this->projectRoot . $target;
             if (file_exists($target)) {
@@ -386,10 +387,10 @@ class SpellInstaller
         }
 
         $this->recursiveRmdir($this->installerSource);
-        $this->recursiveRmdir($this->projectRoot . 'test/ExpressiveInstallerTest');
-        $this->recursiveRmdir($this->projectRoot . 'docs');
+        //$this->recursiveRmdir($this->projectRoot . 'test/ExpressiveInstallerTest');
+        //$this->recursiveRmdir($this->projectRoot . 'docs');
 
-        $this->preparePhpunitConfig();
+        //$this->preparePhpunitConfig();
     }
 
     /**
