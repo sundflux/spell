@@ -104,6 +104,9 @@
             "phpcbf --colors --standard=Drupal --extensions=php,module ./public/modules/custom",
             "phpcbf --colors --standard=Drupal --extensions=php,theme ./public/themes/custom"
         ],
+        "installer": [
+            "SpellInstaller\\SpellInstaller::install"
+        ],
         "test": [
             "@test-behavioral",
             "@test-static-js",
