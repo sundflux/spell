@@ -176,7 +176,7 @@ class SpellInstaller
     public function promptForOptionalPackage(string $questionName, array $question) : void
     {
         $defaultOption = $question['default'] ?? 1;
-        if (isset($this->composerDefinition['extra']['optional-packages'][$questionName])) {
+        if (isset($this->composerDefinition['extra']['answers'][$questionName])) {
             // Skip question, it's already answered
             return;
         }
@@ -186,7 +186,7 @@ class SpellInstaller
         // Process answer
         $this->processAnswer($question, $answer);
         // Save user selected option
-        $this->composerDefinition['extra']['optional-packages'][$questionName] = $answer;
+        $this->composerDefinition['extra']['answers'][$questionName] = $answer;
         // Update composer definition
         $this->composerJson->write($this->composerDefinition);
     }
@@ -216,7 +216,7 @@ class SpellInstaller
         // Remove branch-alias
         //unset($this->composerDefinition['extra']['branch-alias']);
         // Remove installer data
-        //unset($this->composerDefinition['extra']['optional-packages']);
+        unset($this->composerDefinition['extra']['answers']);
         // Remove installer scripts
         //unset($this->composerDefinition['scripts']['pre-update-cmd']);
         //unset($this->composerDefinition['scripts']['pre-install-cmd']);
