@@ -98,6 +98,8 @@
             "mv README.project.md README.md",
             "git init && git add ."
         ],
+        "pre-install-cmd": "SpellInstaller\\SpellInstaller::install",
+        "pre-update-cmd": "SpellInstaller\\SpellInstaller::install",
         "drupal-scaffold": [
             "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
         ],
