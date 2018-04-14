@@ -7,6 +7,9 @@ return [
         'druidfi/amazeeio-scripts' => [
             'version' => 'dev-master',
         ],
+        'drupal/system_status' => [
+            'version' => '^2.7',
+        ],
     ],
 
     'require-dev' => [
@@ -35,31 +38,24 @@ return [
             ],
         ],
 
-        'foobar' => [
-            'question'       => 'Which way you want to go?',
+        'lumturio' => [
+            'question'       => 'Do you want to have Lumturio monitoring?',
             'default'        => 1,
-            'required'       => false,
+            'required'       => true,
             'custom-package' => false,
             'options'        => [
                 1 => [
-                    'name'     => 'My way',
+                    'name'     => 'Yes',
                     'packages' => [
-                        //'zendframework/zend-expressive-platesrenderer',
+                        'drupal/system_status',
                     ],
                     'copy' => [
                         //'Resources/templates/plates/404.phtml' => 'templates/error/404.phtml',
                     ],
                 ],
                 2 => [
-                    'name'     => 'Your way',
+                    'name'     => 'No',
                     'packages' => [
-                        //'zendframework/zend-expressive-twigrenderer',
-                    ],
-                ],
-                3 => [
-                    'name'     => 'Highway',
-                    'packages' => [
-                        //'zendframework/zend-expressive-twigrenderer',
                     ],
                 ],
             ],
