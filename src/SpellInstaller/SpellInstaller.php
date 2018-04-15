@@ -228,8 +228,8 @@ class SpellInstaller
         // Remove installer data
         unset($this->composerDefinition['extra']['answers']);
         // Remove installer scripts
-        //unset($this->composerDefinition['scripts']['pre-update-cmd']);
-        //unset($this->composerDefinition['scripts']['pre-install-cmd']);
+        unset($this->composerDefinition['scripts']['pre-update-cmd']);
+        unset($this->composerDefinition['scripts']['pre-install-cmd']);
         unset($this->composerDefinition['scripts']['post-create-project-cmd']);
         unset($this->composerDefinition['scripts']['installer']);
     }
