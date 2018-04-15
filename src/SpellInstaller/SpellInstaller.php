@@ -221,7 +221,7 @@ class SpellInstaller
     {
         $this->io->write('<info>Remove installer</info>');
         // Remove installer script autoloading rules
-        unset($this->composerDefinition['autoload']['psr-4']['SpellInstaller\\']);
+        unset($this->composerDefinition['autoload']['psr-4']); //['SpellInstaller\\']);
         //unset($this->composerDefinition['autoload-dev']['psr-4']['ExpressiveInstallerTest\\']);
         // Remove branch-alias
         //unset($this->composerDefinition['extra']['branch-alias']);
