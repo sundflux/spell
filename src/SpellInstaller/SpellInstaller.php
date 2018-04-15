@@ -457,7 +457,7 @@ class SpellInstaller
 
         $ask[] = ($question['custom-package'] === true)
             ? sprintf(
-                '  Make your selection or type a composer package name and version <comment>(%s)</comment>: ',
+                '  Make your selection <comment>(%s)</comment>: ',
                 $defaultText
             )
             : sprintf('  Make your selection <comment>(%s)</comment>: ', $defaultText);
@@ -477,7 +477,7 @@ class SpellInstaller
             }
 
             // Search for package
-            if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
+            /*if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
                 $packageName    = $match['name'];
                 $packageVersion = $match['version'];
 
@@ -495,7 +495,7 @@ class SpellInstaller
                 }
 
                 return sprintf('%s:%s', $packageName, $packageVersion);
-            }
+            }*/
 
             $this->io->write('<error>Invalid answer</error>');
         }
