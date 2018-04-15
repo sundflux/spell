@@ -33,7 +33,7 @@ class SpellInstaller
      * @var string[]
      */
     private $assetsToCopy = [
-        'README.project.md' => 'README.md',
+        'resources/README.md' => 'README.md',
     ];
 
     /**
