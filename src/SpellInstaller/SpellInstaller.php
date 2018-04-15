@@ -42,8 +42,10 @@ class SpellInstaller
      * @var string[]
      */
     private $assetsToRemove = [
+        '.travis.yml',
         'CHANGELOG.md',
         'README.project.md',
+        'Makefile',
     ];
 
     /**
