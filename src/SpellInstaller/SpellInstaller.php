@@ -288,16 +288,6 @@ class SpellInstaller
             return true;
         }
 
-        if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, (string) $answer, $match)) {
-            $this->addPackage($match['name'], $match['version'], []);
-
-            if (isset($question['custom-package-warning'])) {
-                $this->io->write(sprintf('  <warning>%s</warning>', $question['custom-package-warning']));
-            }
-
-            return true;
-        }
-
         return false;
     }
 
@@ -455,12 +445,7 @@ class SpellInstaller
             $ask[] = "  [<comment>n</comment>] None of the above\n";
         }
 
-        $ask[] = ($question['custom-package'] === true)
-            ? sprintf(
-                '  Make your selection <comment>(%s)</comment>: ',
-                $defaultText
-            )
-            : sprintf('  Make your selection <comment>(%s)</comment>: ', $defaultText);
+        $ask[] = sprintf('  Make your selection <comment>(%s)</comment>: ', $defaultText);
 
         while (true) {
             // Ask for user input
@@ -475,27 +460,6 @@ class SpellInstaller
             if (is_numeric($answer) && isset($question['options'][(int) $answer])) {
                 return (int) $answer;
             }
-
-            // Search for package
-            /*if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, $answer, $match)) {
-                $packageName    = $match['name'];
-                $packageVersion = $match['version'];
-
-                if (! $packageVersion) {
-                    $this->io->write('<error>No package version specified</error>');
-                    continue;
-                }
-
-                $this->io->write(sprintf('  - Searching for <info>%s:%s</info>', $packageName, $packageVersion));
-
-                $optionalPackage = $this->composer->getRepositoryManager()->findPackage($packageName, $packageVersion);
-                if (null === $optionalPackage) {
-                    $this->io->write(sprintf('<error>Package not found %s:%s</error>', $packageName, $packageVersion));
-                    continue;
-                }
-
-                return sprintf('%s:%s', $packageName, $packageVersion);
-            }*/
 
             $this->io->write('<error>Invalid answer</error>');
         }

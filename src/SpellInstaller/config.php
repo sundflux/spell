@@ -12,20 +12,19 @@ return [
         ],
     ],
 
+    // Which of the packages belong to require-dev section
     'require-dev' => [
         'druidfi/amazeeio-scripts',
     ],
 
     'questions' => [
         'amazeeio' => [
-            'question'               => 'Is this project going to be hosted on Amazee.io or use their development tools?',
-            'default'                => 1,
-            'required'               => true,
-            'custom-package'         => true,
-            //'custom-package-warning' => 'You need to edit public/index.php to start the custom container.',
-            'options'                => [
+            'question' => 'Is this project going to be hosted on Amazee.io or use their development tools?',
+            'default' => 1,
+            'required'=> true,
+            'options' => [
                 1 => [
-                    'name'     => 'Yes',
+                    'name' => 'Yes',
                     'packages' => [
                         'druidfi/amazeeio-scripts',
                     ],
@@ -37,7 +36,7 @@ return [
                     ]
                 ],
                 2 => [
-                    'name'     => 'No',
+                    'name' => 'No',
                     'packages' => [
                     ],
                 ],
@@ -45,22 +44,21 @@ return [
         ],
 
         'lumturio' => [
-            'question'       => 'Do you want to have Lumturio monitoring?',
-            'default'        => 1,
-            'required'       => true,
-            'custom-package' => false,
-            'options'        => [
+            'question' => 'Do you want to have Lumturio monitoring?',
+            'default' => 1,
+            'required' => true,
+            'options' => [
                 1 => [
-                    'name'     => 'Yes',
+                    'name' => 'Yes',
                     'packages' => [
                         'drupal/system_status',
                     ],
                     'copy' => [
-                        //'Resources/templates/plates/404.phtml' => 'templates/error/404.phtml',
+                        //'resources/something.php' => 'something.php',
                     ],
                 ],
                 2 => [
-                    'name'     => 'No',
+                    'name' => 'No',
                     'packages' => [
                     ],
                 ],
