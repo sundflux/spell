@@ -85,6 +85,11 @@
             "SpellInstaller\\": "src/SpellInstaller/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "SpellInstallerTest\\": "test/SpellInstallerTest/"
+        }
+    },
     "scripts": {
         "pre-install-cmd": "SpellInstaller\\SpellInstaller::install",
         "pre-update-cmd": "SpellInstaller\\SpellInstaller::install",

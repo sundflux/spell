@@ -244,6 +244,7 @@ class SpellInstaller
         unset($this->composerDefinition['scripts']['pre-update-cmd']);
         unset($this->composerDefinition['scripts']['pre-install-cmd']);
         unset($this->composerDefinition['scripts']['post-create-project-cmd']);
+        unset($this->composerDefinition['scripts']['check']);
         unset($this->composerDefinition['scripts']['installer']);
     }
 
