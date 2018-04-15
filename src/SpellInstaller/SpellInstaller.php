@@ -128,7 +128,7 @@ class SpellInstaller
         $installer->promptForOptionalPackages();
         $installer->updateRootPackage();
         $installer->removeInstallerFromDefinition();
-        //$installer->finalizePackage();
+        $installer->finalizePackage();
     }
 
     public function __construct(IOInterface $io, Composer $composer, string $projectRoot = null)
