@@ -221,8 +221,8 @@ class SpellInstaller
     {
         $this->io->write('<info>Remove installer</info>');
         // Remove installer script autoloading rules
-        unset($this->composerDefinition['autoload']); //['SpellInstaller\\']);
-        unset($this->composerDefinition['autoload-dev']); //['psr-4']['ExpressiveInstallerTest\\']);
+        unset($this->composerDefinition['autoload']);
+        unset($this->composerDefinition['autoload-dev']);
         // Remove branch-alias
         //unset($this->composerDefinition['extra']['branch-alias']);
         // Remove installer data
@@ -268,22 +268,36 @@ class SpellInstaller
                     $this->addPackage($packageName, $packageData['version'], $packageData['whitelist'] ?? []);
                 }
             }
+
             // Copy files
             if (isset($question['options'][$answer]['copy'])) {
                 $force = ! empty($question['force']);
+
                 foreach ($question['options'][$answer]['copy'] as $resource => $target) {
                     $this->copyResource($resource, $target, $force);
                 }
             }
+
+            // Add scripts
+            if (isset($question['options'][$answer]['scripts'])) {
+                foreach ($question['options'][$answer]['scripts'] as $scriptName => $scriptCommands) {
+                    $this->composerDefinition['scripts'][$scriptName] = $scriptCommands;
+                }
+            }
+
             return true;
         }
+
         if ($question['custom-package'] === true && preg_match(self::PACKAGE_REGEX, (string) $answer, $match)) {
             $this->addPackage($match['name'], $match['version'], []);
+
             if (isset($question['custom-package-warning'])) {
                 $this->io->write(sprintf('  <warning>%s</warning>', $question['custom-package-warning']));
             }
+
             return true;
         }
+
         return false;
     }
 
@@ -413,8 +427,6 @@ class SpellInstaller
         }
 
         $this->recursiveRmdir($this->installerSource);
-        //$this->recursiveRmdir($this->projectRoot . 'test/ExpressiveInstallerTest');
-        //$this->recursiveRmdir($this->projectRoot . 'docs');
     }
 
     /**

@@ -29,6 +29,12 @@ return [
                     'packages' => [
                         'druidfi/amazeeio-scripts',
                     ],
+                    'scripts' => [
+                        'update-amazee-scripts' => [
+                            'rsync -av vendor/druidfi/amazeeio-scripts/dist/ .',
+                            'git status -s',
+                        ]
+                    ]
                 ],
                 2 => [
                     'name'     => 'No',
