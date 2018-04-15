@@ -57,6 +57,10 @@ This will basically do following command:
 
 `composer create-project druidfi/spell:dev-master /tmp/mysite/master`
 
+## Travis notes
+
+When Travis runs tests, all questions get answered with the default option.
+
 ## Other information
 
 This project is found from the Packagist: https://packagist.org/packages/druidfi/spell
