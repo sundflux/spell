@@ -91,10 +91,6 @@
         }
     },
     "scripts": {
-        "post-create-project-cmd": [
-            "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
-            "git init && git add ."
-        ],
         "pre-install-cmd": "SpellInstaller\\SpellInstaller::install",
         "pre-update-cmd": "SpellInstaller\\SpellInstaller::install",
         "drupal-scaffold": [
