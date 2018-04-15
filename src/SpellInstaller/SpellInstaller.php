@@ -400,7 +400,7 @@ class SpellInstaller
         $this->io->write('<info>Copy resources</info>');
 
         foreach ($this->assetsToCopy as $source => $target) {
-            $this->copyResource($source, $target);
+            $this->copyResource($source, $target, true);
         }
 
         $this->io->write('<info>Removing Spell installer resources</info>');
