@@ -28,13 +28,22 @@ class SpellInstaller
     public const PACKAGE_REGEX = '/^(?P<name>[^:]+\/[^:]+)([:]*)(?P<version>.*)$/';
 
     /**
+     * Assets to copy during cleanup.
+     *
+     * @var string[]
+     */
+    private $assetsToCopy = [
+        'README.project.md' => 'README.md',
+    ];
+
+    /**
      * Assets to remove during cleanup.
      *
      * @var string[]
      */
     private $assetsToRemove = [
-        //'.travis.yml',
         'CHANGELOG.md',
+        'README.project.md',
     ];
 
     /**
@@ -388,7 +397,14 @@ class SpellInstaller
      */
     private function cleanUp() : void
     {
-        $this->io->write('<info>Removing Spell installer classes, configuration, tests and docs</info>');
+        $this->io->write('<info>Copy resources</info>');
+
+        foreach ($this->assetsToCopy as $source => $target) {
+            $this->copyResource($source, $target);
+        }
+
+        $this->io->write('<info>Removing Spell installer resources</info>');
+
         foreach ($this->assetsToRemove as $target) {
             $target = $this->projectRoot . $target;
             if (file_exists($target)) {

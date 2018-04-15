@@ -21,6 +21,11 @@ Create the project locally:
 $ composer create-project druidfi/spell:dev-master YOUR_PROJECT
 ```
 
+Composer will ask for following optional things:
+
+- Requiring Amazee.io toolset (druidfi/amazeeio-scripts)
+- Requiring Lumturio's monitoring module for Drupal (drupal/system_status)
+
 Change hostname for your local site in the `YOUR_PROJECT/docker-compose.yml`:
 
 `hostname: &hostname mysite.fi.docker.amazee.io` to `hostname: &hostname yoursite.fi.docker.amazee.io`
@@ -50,7 +55,7 @@ $ make test-master
 
 This will basically do following command:
 
-`composer create-project druidfi/spell:dev-master /tmp/mysite/master --no-interaction`
+`composer create-project druidfi/spell:dev-master /tmp/mysite/master`
 
 ## Other information
 

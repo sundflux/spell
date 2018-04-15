@@ -93,7 +93,6 @@
     "scripts": {
         "post-create-project-cmd": [
             "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
-            "mv README.project.md README.md",
             "git init && git add ."
         ],
         "pre-install-cmd": "SpellInstaller\\SpellInstaller::install",
