@@ -123,9 +123,11 @@ class SpellInstaller
     public static function install(Event $event) : void
     {
         $installer = new self($event->getIO(), $event->getComposer());
-        $installer->io->write('<info>Setting up optional packages</info>');
+
+        $installer->io->write('<info>Set up optional features</info>');
+
         $installer->removeDevDependencies();
-        $installer->promptForOptionalPackages();
+        $installer->promptForOptionalFeatures();
         $installer->updateRootPackage();
         $installer->removeInstallerFromDefinition();
         $installer->finalizePackage();
@@ -135,15 +137,20 @@ class SpellInstaller
     {
         $this->io = $io;
         $this->composer = $composer;
+        
         // Get composer.json location
         $composerFile = Factory::getComposerFile();
+        
         // Calculate project root from composer.json, if necessary
         $this->projectRoot = $projectRoot ?: realpath(dirname($composerFile));
         $this->projectRoot = rtrim($this->projectRoot, '/\\') . '/';
+        
         // Parse the composer.json
         $this->parseComposerDefinition($composer, $composerFile);
+        
         // Get optional packages configuration
         $this->config = require __DIR__ . '/config.php';
+        
         // Source path for this file
         $this->installerSource = realpath(__DIR__) . '/';
     }
@@ -157,6 +164,7 @@ class SpellInstaller
     public function removeDevDependencies() : void
     {
         $this->io->write('<info>Removing installer development dependencies</info>');
+        
         foreach ($this->devDependencies as $devDependency) {
             unset($this->stabilityFlags[$devDependency]);
             unset($this->composerDevRequires[$devDependency]);
@@ -165,38 +173,42 @@ class SpellInstaller
     }
 
     /**
-     * Prompt for each optional installation package.
+     * Prompt for each optional feature.
      *
      * @codeCoverageIgnore
      */
-    public function promptForOptionalPackages() : void
+    public function promptForOptionalFeatures() : void
     {
         foreach ($this->config['questions'] as $questionName => $question) {
-            $this->promptForOptionalPackage($questionName, $question);
+            $this->promptForOptionalFeature($questionName, $question);
         }
     }
 
     /**
-     * Prompt for a single optional installation package.
+     * Prompt for a single optional feature.
      *
      * @param string $questionName Name of question
      * @param array $question Question details from configuration
      * @throws \Exception
      */
-    public function promptForOptionalPackage(string $questionName, array $question) : void
+    public function promptForOptionalFeature(string $questionName, array $question) : void
     {
         $defaultOption = $question['default'] ?? 1;
+
         if (isset($this->composerDefinition['extra']['answers'][$questionName])) {
             // Skip question, it's already answered
             return;
         }
-        // Get answer
 
+        // Get answer
         $answer = $this->askQuestion($question, $defaultOption);
+
         // Process answer
         $this->processAnswer($question, $answer);
+
         // Save user selected option
         $this->composerDefinition['extra']['answers'][$questionName] = $answer;
+
         // Update composer definition
         $this->composerJson->write($this->composerDefinition);
     }
@@ -220,13 +232,14 @@ class SpellInstaller
     public function removeInstallerFromDefinition() : void
     {
         $this->io->write('<info>Remove installer</info>');
+
         // Remove installer script autoloading rules
         unset($this->composerDefinition['autoload']);
         unset($this->composerDefinition['autoload-dev']);
-        // Remove branch-alias
-        //unset($this->composerDefinition['extra']['branch-alias']);
+
         // Remove installer data
         unset($this->composerDefinition['extra']['answers']);
+
         // Remove installer scripts
         unset($this->composerDefinition['scripts']['pre-update-cmd']);
         unset($this->composerDefinition['scripts']['pre-install-cmd']);
@@ -245,7 +258,6 @@ class SpellInstaller
      */
     public function finalizePackage() : void
     {
-        // Update composer definition
         $this->composerJson->write($this->composerDefinition);
         $this->clearComposerLockFile();
         $this->cleanUp();
@@ -265,7 +277,7 @@ class SpellInstaller
             if (isset($question['options'][$answer]['packages'])) {
                 foreach ($question['options'][$answer]['packages'] as $packageName) {
                     $packageData = $this->config['packages'][$packageName];
-                    $this->addPackage($packageName, $packageData['version'], $packageData['whitelist'] ?? []);
+                    $this->addPackage($packageName, $packageData['version']);
                 }
             }
 
@@ -296,9 +308,8 @@ class SpellInstaller
      *
      * @param string $packageName
      * @param string $packageVersion
-     * @param array $whitelist
      */
-    public function addPackage(string $packageName, string $packageVersion, array $whitelist = []) : void
+    public function addPackage(string $packageName, string $packageVersion) : void
     {
         $this->io->write(sprintf(
             '  - Adding package <info>%s</info> (<comment>%s</comment>)',
@@ -308,7 +319,7 @@ class SpellInstaller
 
         // Get the version constraint
         $versionParser = new VersionParser();
-        $constraint    = $versionParser->parseConstraints($packageVersion);
+        $constraint = $versionParser->parseConstraints($packageVersion);
 
         // Create package link
         $link = new Link('__root__', $packageName, $constraint, 'requires', $packageVersion);
@@ -319,13 +330,13 @@ class SpellInstaller
             unset($this->composerRequires[$packageName]);
 
             $this->composerDefinition['require-dev'][$packageName] = $packageVersion;
-            $this->composerDevRequires[$packageName]               = $link;
+            $this->composerDevRequires[$packageName] = $link;
         } else {
             unset($this->composerDefinition['require-dev'][$packageName]);
             unset($this->composerDevRequires[$packageName]);
 
             $this->composerDefinition['require'][$packageName] = $packageVersion;
-            $this->composerRequires[$packageName]              = $link;
+            $this->composerRequires[$packageName] = $link;
         }
 
         // Set package stability if needed
@@ -342,14 +353,6 @@ class SpellInstaller
             case 'RC':
                 $this->stabilityFlags[$packageName] = BasePackage::STABILITY_RC;
                 break;
-        }
-
-        // Whitelist packages for the component installer
-        foreach ($whitelist as $package) {
-            if (! in_array($package, $this->composerDefinition['extra']['zf']['component-whitelist'], true)) {
-                $this->composerDefinition['extra']['zf']['component-whitelist'][] = $package;
-                $this->io->write(sprintf('  - Whitelist package <info>%s</info>', $package));
-            }
         }
     }
 
@@ -438,7 +441,7 @@ class SpellInstaller
 
         foreach ($question['options'] as $key => $option) {
             $defaultText = ($key === $defaultOption) ? $option['name'] : $defaultText;
-            $ask[]       = sprintf("  [<comment>%d</comment>] %s\n", $key, $option['name']);
+            $ask[]= sprintf("  [<comment>%d</comment>] %s\n", $key, $option['name']);
         }
 
         if ($question['required'] !== true) {
@@ -481,13 +484,16 @@ class SpellInstaller
 
         $rdi = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
         $rii = new RecursiveIteratorIterator($rdi, RecursiveIteratorIterator::CHILD_FIRST);
+
         foreach ($rii as $filename => $fileInfo) {
             if ($fileInfo->isDir()) {
                 rmdir($filename);
                 continue;
             }
+
             unlink($filename);
         }
+
         rmdir($directory);
     }
 
@@ -501,7 +507,6 @@ class SpellInstaller
         $this->io->write('<info>Removing composer.lock from .gitignore</info>');
 
         $ignoreFile = sprintf('%s/.gitignore', $this->projectRoot);
-
         $content = $this->removeLinesContainingStrings(['composer.lock'], file_get_contents($ignoreFile));
         file_put_contents($ignoreFile, $content);
     }
@@ -520,7 +525,7 @@ class SpellInstaller
         $this->rootPackage = $composer->getPackage();
 
         // Get required packages
-        $this->composerRequires    = $this->rootPackage->getRequires();
+        $this->composerRequires = $this->rootPackage->getRequires();
         $this->composerDevRequires = $this->rootPackage->getDevRequires();
 
         // Get stability flags

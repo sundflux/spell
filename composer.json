@@ -93,6 +93,7 @@
     "scripts": {
         "pre-install-cmd": "SpellInstaller\\SpellInstaller::install",
         "pre-update-cmd": "SpellInstaller\\SpellInstaller::install",
+        "check": "phpcs --colors --standard=Zend src",
         "drupal-scaffold": [
             "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
         ],
