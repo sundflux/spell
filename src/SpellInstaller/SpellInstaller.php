@@ -16,7 +16,6 @@ use Composer\Script\Event;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use RuntimeException;
 
 /**
  * Composer installer script
@@ -110,6 +109,7 @@ class SpellInstaller
      * install and update commands on completion.
      *
      * @codeCoverageIgnore
+     * @param Event $event
      */
     public static function install(Event $event) : void
     {
@@ -172,6 +172,7 @@ class SpellInstaller
      *
      * @param string $questionName Name of question
      * @param array $question Question details from configuration
+     * @throws \Exception
      */
     public function promptForOptionalPackage(string $questionName, array $question) : void
     {
@@ -244,7 +245,9 @@ class SpellInstaller
     /**
      * Process the answer of a question
      *
+     * @param array $question
      * @param bool|int|string $answer
+     * @return bool
      */
     public function processAnswer(array $question, $answer) : bool
     {
@@ -277,6 +280,10 @@ class SpellInstaller
 
     /**
      * Add a package
+     *
+     * @param string $packageName
+     * @param string $packageVersion
+     * @param array $whitelist
      */
     public function addPackage(string $packageName, string $packageVersion, array $whitelist = []) : void
     {
@@ -358,6 +365,9 @@ class SpellInstaller
 
     /**
      * Remove lines from string content containing words in array.
+     * @param array $entries
+     * @param string $content
+     * @return string
      */
     public function removeLinesContainingStrings(array $entries, string $content) : string
     {
@@ -389,26 +399,12 @@ class SpellInstaller
         $this->recursiveRmdir($this->installerSource);
         //$this->recursiveRmdir($this->projectRoot . 'test/ExpressiveInstallerTest');
         //$this->recursiveRmdir($this->projectRoot . 'docs');
-
-        //$this->preparePhpunitConfig();
-    }
-
-    /**
-     * Remove the ExpressiveInstaller exclusion from the phpunit configuration
-     *
-     * @codeCoverageIgnore
-     */
-    private function preparePhpunitConfig() : void
-    {
-        $phpunitConfigFile = $this->projectRoot . 'phpunit.xml.dist';
-        $phpunitConfig     = file_get_contents($phpunitConfigFile);
-        $phpunitConfig     = $this->removeLinesContainingStrings(['exclude', 'ExpressiveInstaller'], $phpunitConfig);
-        file_put_contents($phpunitConfigFile, $phpunitConfig);
     }
 
     /**
      * Prepare and ask questions and return the answer
      *
+     * @param array $question
      * @param int|string $defaultOption
      * @return bool|int|string
      * @codeCoverageIgnore
@@ -483,6 +479,7 @@ class SpellInstaller
      * Recursively remove a directory.
      *
      * @codeCoverageIgnore
+     * @param string $directory
      */
     private function recursiveRmdir(string $directory) : void
     {
@@ -519,6 +516,8 @@ class SpellInstaller
 
     /**
      * Parses the composer file and populates internal data
+     * @param Composer $composer
+     * @param string $composerFile
      */
     private function parseComposerDefinition(Composer $composer, string $composerFile) : void
     {
