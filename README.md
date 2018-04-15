@@ -18,7 +18,7 @@ codebase.
 Create the project locally:
 
 ```
-$ composer create-project druidfi/spell:dev-master YOUR_PROJECT --no-interaction
+$ composer create-project druidfi/spell:dev-master YOUR_PROJECT
 ```
 
 Change hostname for your local site in the `YOUR_PROJECT/docker-compose.yml`:
