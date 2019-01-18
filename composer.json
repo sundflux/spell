@@ -105,7 +105,8 @@
     "test-unit": [
       "phpunit -c phpunit.xml.dist --testsuite unit"
     ],
-    "update-amazee-scripts": [
+    "update-amazeeio-scripts": [
+      "@composer update druidfi/amazeeio-scripts",
       "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
       "git status -s"
     ],
