@@ -25,11 +25,11 @@ Change hostname for your local site in the `YOUR_PROJECT/docker-compose.yml`:
 
 `hostname: &hostname mysite.fi.docker.amazee.io` to `hostname: &hostname yoursite.fi.docker.amazee.io`
 
-Start the development environment and build the initial codebase:
+Start the development environment, build development codebase and install empty site:
 
 ```
 $ cd YOUR_PROJECT
-$ make init
+$ make new
 ```
 
 Now your site can can be accessed from http://yoursite.fi.docker.amazee.io
