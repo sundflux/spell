@@ -66,6 +66,15 @@
     }
   ],
   "scripts": {
+    "build-development": [
+      "@composer install --prefer-dist --no-suggest --ansi"
+    ],
+    "build-testing": [
+      "@composer build-production"
+    ],
+    "build-production": [
+      "@composer install --no-dev --prefer-dist --no-suggest --optimize-autoloader --ansi"
+    ],
     "post-create-project-cmd": [
       "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
       "mv README.project.md README.md",
