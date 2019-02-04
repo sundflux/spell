@@ -1,116 +1,115 @@
 {
-  "name": "druidfi/spell",
-  "description": "Spell to create a new Drupal 8 project",
-  "type": "project",
-  "license": "MIT",
-  "homepage": "https://github.com/druidfi/spell",
-  "authors": [
-    {
-      "name": "Druid.fi",
-      "email": "info@druid.fi"
-    }
-  ],
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "require": {
-    "composer/installers": "^1.6",
-    "cweagans/composer-patches": "^1.6",
-    "drupal-composer/drupal-scaffold": "^2.5",
-    "drupal/admin_toolbar": "^1.22",
-    "drupal/config_installer": "^1.5",
-    "drupal/core": "^8.6.7",
-    "drupal/pathauto": "^1.3",
-    "drupal/swiftmailer": "^1.0@beta",
-    "drupal/system_status": "^2.8",
-    "drush/drush": "^8.1.18",
-    "wikimedia/composer-merge-plugin": "~1.0"
-  },
-  "require-dev": {
-    "druidfi/amazeeio-scripts": "dev-master",
-    "drupal/coder": "^8.2.12",
-    "drupal/console": "^1.8.0",
-    "drupal/drupal-extension": "~3.3",
-    "phpunit/phpunit": "~6.1"
-  },
-  "conflict": {
-    "drupal/drupal": "*"
-  },
-  "config": {
-    "platform": {
-      "php": "7.1"
+    "name": "druidfi/spell",
+    "description": "Spell to create a new Drupal 8 project",
+    "type": "project",
+    "license": "MIT",
+    "homepage": "https://github.com/druidfi/spell",
+    "authors": [
+        {
+            "name": "Druid.fi",
+            "email": "info@druid.fi"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "composer/installers": "^1.0",
+        "cweagans/composer-patches": "^1.0",
+        "drupal-composer/drupal-scaffold": "^2.0",
+        "drupal/admin_toolbar": "^1.0",
+        "drupal/core": "^8.6",
+        "drupal/pathauto": "^1.0",
+        "drupal/swiftmailer": "^1.0@beta",
+        "drupal/system_status": "^2.0",
+        "drush/drush": "^9",
+        "wikimedia/composer-merge-plugin": "^1.0"
     },
-    "sort-packages": true
-  },
-  "extra": {
-    "merge-plugin": {
-      "include": [
-        "public/modules/custom/*/composer.json"
-      ]
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+        "druidfi/amazeeio-scripts": "dev-master",
+        "drupal/coder": "^8.2",
+        "drupal/drupal-extension": "~3.3",
+        "phpunit/phpunit": "~6.1"
     },
-    "installer-paths": {
-      "public/core": ["type:drupal-core"],
-      "public/libraries/{$name}": ["type:drupal-library"],
-      "public/modules/contrib/{$name}": ["type:drupal-module"],
-      "public/modules/custom/{$name}": ["type:drupal-module-custom"],
-      "public/profiles/{$name}": ["type:drupal-profile"],
-      "public/themes/contrib/{$name}": ["type:drupal-theme"],
-      "public/themes/custom/{$name}": ["type:drupal-theme-custom"],
-      "drush/{$name}": ["type:drupal-drush"]
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "config": {
+        "platform": {
+            "php": "7.1"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "merge-plugin": {
+            "include": [
+                "public/modules/custom/*/composer.json"
+            ]
+        },
+        "installer-paths": {
+            "public/core": ["type:drupal-core"],
+            "public/libraries/{$name}": ["type:drupal-library"],
+            "public/modules/contrib/{$name}": ["type:drupal-module"],
+            "public/modules/custom/{$name}": ["type:drupal-module-custom"],
+            "public/profiles/{$name}": ["type:drupal-profile"],
+            "public/themes/contrib/{$name}": ["type:drupal-theme"],
+            "public/themes/custom/{$name}": ["type:drupal-theme-custom"],
+            "drush/{$name}": ["type:drupal-drush"]
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "scripts": {
+        "build-development": [
+            "@composer install --prefer-dist --no-suggest --ansi"
+        ],
+        "build-testing": [
+            "@composer build-production"
+        ],
+        "build-production": [
+            "@composer install --no-dev --prefer-dist --no-suggest --optimize-autoloader --ansi"
+        ],
+        "post-create-project-cmd": [
+            "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
+            "mv README.project.md README.md",
+            "git init && git add ."
+        ],
+        "drupal-scaffold": [
+            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
+        ],
+        "fix": [
+            "phpcbf --colors --standard=Drupal --extensions=php,theme,module --ignore='*.css,*.md,node_modules' ./public/modules/custom ./public/themes/custom"
+        ],
+        "test": [
+            "@test-behavioral",
+            "@test-static-js",
+            "@test-static-php",
+            "@test-unit"
+        ],
+        "test-behavioral": [
+            "tools/behavioral-tests"
+        ],
+        "test-static-js": [
+            "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/modules/custom/*/js",
+            "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/themes/custom/*/js"
+        ],
+        "test-static-php": [
+            "phpcs --colors --standard=Drupal --extensions=php,theme,module --ignore='*.css,*.md,node_modules' ./public/modules/custom ./public/themes/custom"
+        ],
+        "test-unit": [
+            "phpunit -c phpunit.xml.dist --testsuite unit"
+        ],
+        "update-amazeeio-scripts": [
+            "@composer update druidfi/amazeeio-scripts",
+            "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
+            "git status -s"
+        ],
+        "update-deps": [
+            "@composer update --with-dependencies --no-scripts --no-suggest --prefer-dist --ignore-platform-reqs --ansi"
+        ]
     }
-  },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://packages.drupal.org/8"
-    }
-  ],
-  "scripts": {
-    "build-development": [
-      "@composer install --prefer-dist --no-suggest --ansi"
-    ],
-    "build-testing": [
-      "@composer build-production"
-    ],
-    "build-production": [
-      "@composer install --no-dev --prefer-dist --no-suggest --optimize-autoloader --ansi"
-    ],
-    "post-create-project-cmd": [
-      "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
-      "mv README.project.md README.md",
-      "git init && git add ."
-    ],
-    "drupal-scaffold": [
-      "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
-    ],
-    "fix": [
-      "phpcbf --config-set installed_paths vendor/drupal/coder/coder_sniffer && phpcbf --colors --standard=Drupal --extensions=php,theme,module --ignore='*.css,*.md,node_modules' ./public/modules/custom ./public/themes/custom"
-    ],
-    "test": [
-      "@test-behavioral",
-      "@test-static-js",
-      "@test-static-php",
-      "@test-unit"
-    ],
-    "test-behavioral": [
-      "tools/behavioral-tests"
-    ],
-    "test-static-js": [
-      "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/modules/custom/*/js",
-      "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/themes/custom/*/js"
-    ],
-    "test-static-php": [
-      "phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer && phpcs --colors --standard=Drupal --extensions=php,theme,module --ignore='*.css,*.md,node_modules' ./public/modules/custom ./public/themes/custom"
-    ],
-    "test-unit": [
-      "phpunit -c phpunit.xml.dist --testsuite unit"
-    ],
-    "update-amazeeio-scripts": [
-      "@composer update druidfi/amazeeio-scripts",
-      "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
-      "git status -s"
-    ],
-    "update-deps": [
-      "@composer update --with-dependencies --no-scripts --no-suggest --prefer-dist --ignore-platform-reqs --ansi"
-    ]
-  }
 }
