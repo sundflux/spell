@@ -1,5 +1,6 @@
 # Ignore project files that should not be in version control
 drush/contrib/
+drush/sites/
 files
 files_private
 node_modules
