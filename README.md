@@ -13,13 +13,24 @@ codebase.
 - PHP and Composer
 - [Docker and Pygmy](https://github.com/druidfi/guidelines/blob/master/docs/local_dev_env.md)
 
-## How to use?
+## Create a new project
 
-Create the project locally:
+If you have PHP and Composer installed on your host:
 
 ```
 $ composer create-project druidfi/spell:dev-master YOUR_PROJECT --no-interaction
 ```
+
+Or using Docker image:
+
+```
+mkdir YOUR_PROJECT && cd YOUR_PROJECT && \
+docker run --rm -it --user=drupal -v $PWD:/var/www/drupal/public_html \
+    druidfi/docker-drupal:php71-basic \
+    composer create-project druidfi/spell:dev-master . --no-interaction
+```
+
+### Change configuration
 
 Change hostname for your local site in the `YOUR_PROJECT/docker-compose.yml`:
 
