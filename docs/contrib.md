@@ -3,6 +3,7 @@
 These recommended modules are included in the `composer.json`, but you can remove them if not needed.
 
 - [Admin Toolbar](https://www.drupal.org/project/admin_toolbar) - Improved Drupal Toolbar
+- [CDN](https://www.drupal.org/project/cdn) - Easy CDN integration
 - [GDPR](https://www.drupal.org/project/gdpr) - GPDR checklist and data sanitizers
 - [Pathauto](https://www.drupal.org/project/pathauto) - Automated URL alias generating
 - [Swift Mailer](https://www.drupal.org/project/swiftmailer) - Advanced mailer
