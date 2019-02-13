@@ -53,3 +53,4 @@ $ make shell
 - [Contrib modules included](https://github.com/druidfi/spell/blob/master/docs/contrib.md)
 - [Project structure](https://github.com/druidfi/spell/blob/master/docs/structure.md)
 - [Quality assurance](https://github.com/druidfi/spell/blob/master/docs/qa.md)
+- [FAQ](https://github.com/druidfi/spell/blob/master/docs/faq.md)
